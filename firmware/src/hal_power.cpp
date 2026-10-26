@@ -29,6 +29,10 @@ void powerBegin() {
   for (const ParkedPin& p : kParked) gpio_hold_dis((gpio_num_t)p.pin);
   pinMode(PIN_NEOPIXEL_POWER, OUTPUT);
   digitalWrite(PIN_NEOPIXEL_POWER, LOW);
+  // Cold power-up has no sleep hold on the amp pin, so drive it off until ampEnable(true).
+  // After a deep-sleep wake the pad is still held LOW and this write is a no-op.
+  pinMode(PIN_AMP_ENABLE, OUTPUT);
+  digitalWrite(PIN_AMP_ENABLE, LOW);
 }
 
 void ampEnable(bool on) {

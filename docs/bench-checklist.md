@@ -6,13 +6,10 @@ checks the final code review added. Board: Adafruit QT Py ESP32-S3
 
 ## Before flashing
 
-- Optional two-line edit the review flagged: in `powerBegin()` in
-  `src/hal_power.cpp`, add `pinMode(PIN_AMP_ENABLE, OUTPUT); digitalWrite(PIN_AMP_ENABLE, LOW);`
-  so the amp is off during a cold power-up (battery insertion). Deep-sleep
-  wakes already hold it low.
-- Wire per `config.h`: button A0 to GND, amp enable A1, SD CS A2, SD on
-  SCK/MI/MO, I2S on TX/RX/SCL, amp SD_MODE pin to the enable line, speaker
-  on the amp output. Pack to the BAT/GND pads on the underside, not the 5 V pin.
+- Wire per `docs/wiring.md`. Pack to the BAT/GND pads on the underside,
+  not the 5 V pin.
+- On first battery insertion, listen: there should be no pop or hiss before
+  the first press (`powerBegin()` drives the amp enable low at cold boot).
 - Card prepared with `cardprep` and at least 20 songs. Keep a second card
   with the full library for step 6.
 
